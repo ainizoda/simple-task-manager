@@ -1,10 +1,13 @@
 package main
 
-import "taskmanager/pkg/menu"
+import (
+	"taskmanager/pkg/cmd"
+	"taskmanager/pkg/menu"
+)
 
 func main() {
 	menu.RenderMain()
 	for {
-		menu.ExecCmd(menu.Prompt())
+		menu.ExecCmd(menu.MenuOption(cmd.Prompt()))
 	}
 }
