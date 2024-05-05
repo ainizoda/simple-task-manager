@@ -39,8 +39,8 @@ func showTasks() {
 
 func createTask() {
 	err := tasksSvc.Create(
-		cmd.Scan("Task title: "),
-		cmd.Scan("Task description: "),
+		cmd.ScanWithErr("Task title: "),
+		cmd.ScanWithErr("Task description: "),
 	)
 
 	if err != nil {

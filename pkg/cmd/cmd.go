@@ -11,7 +11,7 @@ import (
 
 func Prompt() int {
 	for {
-		input, err := strconv.Atoi(Scan("$: "))
+		input, err := strconv.Atoi(ScanWithErr("$: "))
 
 		if input < 0 || input > 4 || err != nil {
 			fmt.Print("invalid option!\n\n")
@@ -32,10 +32,13 @@ func ClearWindow() {
 	}
 	cmd := exec.Command(command[0], command[1:]...)
 	cmd.Stdout = os.Stdout
-	cmd.Run()
+
+	if err := cmd.Run(); err != nil {
+		fmt.Println(err)
+	}
 }
 
-func Scan(text string) string {
+func ScanWithErr(text string) string {
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Print(text)
 	scanner.Scan()
