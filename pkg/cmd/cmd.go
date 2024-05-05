@@ -10,8 +10,6 @@ import (
 )
 
 func Prompt() int {
-	var opt int
-
 	for {
 		input, err := strconv.Atoi(Scan("$: "))
 
@@ -19,10 +17,8 @@ func Prompt() int {
 			fmt.Print("invalid option!\n\n")
 			continue
 		}
-		opt = input
-		break
+		return input
 	}
-	return opt
 }
 
 func ClearWindow() {
