@@ -50,14 +50,14 @@ func createTask() {
 	ExecCmd(First)
 }
 
-func renderMain() {
+func RenderMain() {
 	fmt.Print("\nWelcome to simple task manager!\n")
 	fmt.Print("\n1. Show tasks\n2. Create task\n3. Update task\n4. Remove Task\n0. Exit\n\n")
 }
 
 func ExecCmd(opt MenuOption) {
 	cmd.ClearWindow()
-	renderMain()
+	RenderMain()
 
 	switch opt {
 	case First:
