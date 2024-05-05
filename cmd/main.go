@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	menu.RenderMain()
 	for {
 		menu.ExecCmd(menu.MenuOption(cmd.Prompt()))
 	}
