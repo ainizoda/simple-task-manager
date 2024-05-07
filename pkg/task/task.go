@@ -17,6 +17,8 @@ var (
 	ErrTaskNotFound     = fmt.Errorf("error: task not found")
 )
 
+var Statuses = []TaskStatus{Done, InProgress, New}
+
 type Service struct {
 	tasks []*Task
 }

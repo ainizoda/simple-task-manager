@@ -9,11 +9,11 @@ import (
 	"strconv"
 )
 
-func Prompt() int {
+func Prompt(msg string, from, to int) int {
 	for {
-		input, err := strconv.Atoi(ScanWithErr("$: "))
+		input, err := strconv.Atoi(ScanWithErr(msg))
 
-		if input < 0 || input > 4 || err != nil {
+		if input < from || input > to || err != nil {
 			fmt.Print("invalid option!\n\n")
 			continue
 		}

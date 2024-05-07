@@ -3,11 +3,15 @@ package main
 import (
 	"taskmanager/pkg/cmd"
 	"taskmanager/pkg/menu"
+	"taskmanager/pkg/task"
 )
 
 func main() {
-	menu.RenderMain()
+	taskSvc := task.Service{}
+	m := menu.NewMenu(&taskSvc)
+	m.RenderMain()
+
 	for {
-		menu.ExecCmd(menu.MenuOption(cmd.Prompt()))
+		m.ExecCmd(menu.MenuOption(cmd.Prompt("$: ", 0, 4)))
 	}
 }
