@@ -112,10 +112,11 @@ func (m *Menu) updateTaskStatus(taskToUpd *task.Task) {
 	for idx, status := range task.Statuses {
 		fmt.Printf("\n%d. %s", idx+1, status)
 	}
+
 	opt := cmd.Prompt("\n\nSelect new status: ", 1, len(task.Statuses))
+
 	utils.SetField(taskToUpd, "Status", task.Statuses[opt-1])
 	m.ExecCmd(First)
-	fmt.Println(task.Statuses[opt-1])
 }
 
 func (m *Menu) exit() {

@@ -10,7 +10,6 @@ func main() {
 	taskSvc := task.Service{}
 	m := menu.NewMenu(&taskSvc)
 	m.RenderMain()
-
 	for {
 		m.ExecCmd(menu.MenuOption(cmd.Prompt("$: ", 0, 4)))
 	}
