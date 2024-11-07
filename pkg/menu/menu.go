@@ -132,14 +132,18 @@ func (m *Menu) ExecCmd(opt MenuOption) {
 	cmd.ClearWindow()
 	m.RenderMain()
 
-	routes := map[MenuOption]func(){}
+	routes := map[MenuOption]func(){
+		First:  m.showTasks,
+		Second: m.createTask,
+		Third:  m.updateTask,
+		Fourth: m.removeTask,
+		Exit:   m.exit,
+	}
 
-	routes[First] = m.showTasks
-	routes[Second] = m.createTask
-	routes[Third] = m.updateTask
-	routes[Fourth] = m.removeTask
-	routes[Exit] = m.exit
-
-	fn := routes[opt]
-	fn()
+	if fn, ok := routes[opt]; ok {
+		fn()
+	} else {
+		fmt.Println("Invalid option, please try again.")
+		m.ExecCmd(First)
+	}
 }
