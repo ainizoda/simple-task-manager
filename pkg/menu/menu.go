@@ -10,18 +10,11 @@ import (
 	"github.com/rodaine/table"
 )
 
-type TaskService interface {
-	Create(title string, description string) error
-	GetAll() []*task.Task
-	Update(updatedTask *task.Task) error
-	RemoveById(id string) error
-}
-
 type Menu struct {
-	taskSvc TaskService
+	taskSvc task.TaskService
 }
 
-func NewMenu(taskSvc TaskService) *Menu {
+func NewMenu(taskSvc task.TaskService) *Menu {
 	return &Menu{taskSvc: taskSvc}
 }
 
@@ -87,7 +80,7 @@ func (m *Menu) updateTask() {
 		utils.SetField(&taskToUpd, propToUpd, newVal)
 	}
 
-	err := m.taskSvc.Update(&taskToUpd)
+	err := m.taskSvc.Update(taskToUpd)
 
 	if err != nil {
 		fmt.Println(err)

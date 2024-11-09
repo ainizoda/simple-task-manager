@@ -17,6 +17,13 @@ var (
 	ErrTaskNotFound     = fmt.Errorf("error: task not found")
 )
 
+type TaskService interface {
+	Create(title string, description string) error
+	GetAll() []*Task
+	Update(updatedTask Task) error
+	RemoveById(id string) error
+}
+
 var Statuses = []TaskStatus{Done, InProgress, New}
 
 type Service struct {
@@ -39,14 +46,14 @@ func (s *Service) Create(title string, description string) error {
 	if len(strings.TrimSpace(description)) < minDescriptionLength {
 		return ErrDescriptionShort
 	}
-	task := &Task{
+	task := Task{
 		ID:          uuid.NewString(),
 		Status:      New,
 		Title:       title,
 		Description: description,
 		CreatedAt:   time.Now(),
 	}
-	s.tasks = append(s.tasks, task)
+	s.tasks = append(s.tasks, &task)
 	return nil
 }
 
@@ -54,13 +61,13 @@ func (s *Service) GetAll() []*Task {
 	return s.tasks
 }
 
-func (s *Service) Update(updatedTask *Task) error {
+func (s *Service) Update(updatedTask Task) error {
 	task, err := s.findTaskById(updatedTask.ID)
 	if err != nil {
 		return err
 	}
 
-	*task = *updatedTask
+	*task = updatedTask
 	return nil
 }
 
